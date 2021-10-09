@@ -34,7 +34,7 @@ public class NotebookSort {
                 if (nb[i].getPrice() == nb[i + 1].getPrice() && nb[i].getRam() == nb[i + 1].getRam()) {
                     int index1 = Producer.valueOf(nb[i].getProd()).ordinal();
                     int index2 = Producer.valueOf(nb[i + 1].getProd()).ordinal();
-                    if (index1 > index2) {
+                    if (index1 < index2) {
                         Notebook note = nb[i];
                         nb[i] = nb[i + 1];
                         nb[i + 1] = note;

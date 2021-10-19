@@ -1,7 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        testLinkedList();
+      //  testLinkedList();
         testTwoSideLinkedList();
     }
     private static void testLinkedList() {
@@ -26,13 +26,13 @@ public class Main {
         }
         System.out.println();
 
-//        System.out.println("Find 2: " + linkedList.contains(2));
-//        System.out.println("Find 1: " + linkedList.contains(1));
-//        System.out.println("Find 4: " + linkedList.contains(4));
-//        System.out.println("Find 4444: " + linkedList.contains(4444));
+        System.out.println("Find 2: " + linkedList.contains(2));
+        System.out.println("Find 1: " + linkedList.contains(1));
+        System.out.println("Find 4: " + linkedList.contains(4));
+        System.out.println("Find 4444: " + linkedList.contains(4444));
 
         linkedList.removeFirst();
-        linkedList.remove(4);
+        linkedList.remove(3);
         System.out.println("Список после удаления некоторых элементов: ");
         linkedList.display();
 
@@ -43,7 +43,7 @@ public class Main {
     }
 
     private static void testTwoSideLinkedList() {
-        TwoSideLinkedList linkedList = new TwoSideLinkedListImpl();
+        TwoSideLinkedListImpl<Integer> linkedList = new TwoSideLinkedListImpl();
         linkedList.insertFirst(1);
         linkedList.insertFirst(2);
         linkedList.insertFirst(3);
@@ -58,17 +58,17 @@ public class Main {
         System.out.println("Исходный двухсвязный список: ");
         linkedList.display();
 
+        System.out.println("Работа итератора: ");
+        for (Integer value : linkedList) {
+            System.out.print("value: " + value + " ");
+        }
+        System.out.println();
+
         linkedList.removeFirst();
         linkedList.removeLast();
         linkedList.removeFirst();
         linkedList.removeLast();
         System.out.println("Список после удаления некоторых элементов: ");
         linkedList.display();
-
     }
-
-
-
-
-
 }

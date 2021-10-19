@@ -1,5 +1,7 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class TwoSideLinkedListImpl<E> extends SimpleLinkedListImpl<E> implements TwoSideLinkedList<E> {
+public class TwoSideLinkedListImpl<E> extends SimpleLinkedListImpl<E> implements TwoSideLinkedList<E>, Iterable<E> {
     protected Node<E> last;
 
     @Override
@@ -87,5 +89,53 @@ public class TwoSideLinkedListImpl<E> extends SimpleLinkedListImpl<E> implements
         return last.item;
     }
 
+    public Iterator<E> iterator() {
+        return new TwoSideLinkedListImpl.LinkedListIterator();
+    }
 
+    private class LinkedListIterator implements Iterator<E> {
+        private final TwoSideLinkedListImpl<E> list;
+        private Node<E> current;
+        private Node<E> previous;
+
+        public LinkedListIterator() {
+            this.list = TwoSideLinkedListImpl.this;
+            reset();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            E nextValue = current.item;
+            previous = current;
+            current = current.next;
+            return nextValue;
+        }
+
+        @Override
+        public void remove() {
+            if (previous == null) {
+                list.first = current.next;
+                reset();
+            } else {
+                previous.next = current.next;
+                if (!hasNext()) {
+                    reset();
+                } else {
+                    current = current.next;
+                }
+            }
+        }
+        public void reset() {
+            current = list.first;
+            previous = null;
+        }
+    }
 }

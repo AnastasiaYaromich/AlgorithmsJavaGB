@@ -3,14 +3,12 @@ import java.util.*;
 public class GraphImpl implements Graph {
     private final List<Vertex> vertexList;
     private final int[][] adjMatrix;
-    private ArrayList<Integer> listDistance;
     private int shortDistanse;
 
 
     public GraphImpl(int maxVertexCount) {
         this.vertexList = new ArrayList<>(maxVertexCount);
         this.adjMatrix = new int[maxVertexCount][maxVertexCount];
-
     }
 
     @Override
@@ -112,7 +110,6 @@ public class GraphImpl implements Graph {
     private void resetVertexState() {
         for (Vertex vertex : vertexList) {
             vertex.setVisited(false);
-            vertex.setPreviousVertex(null);
         }
     }
 
@@ -132,15 +129,8 @@ public class GraphImpl implements Graph {
         vertex.setVisited(true);
     }
 
-    private void visitVertex(Queue<Vertex> queue, Vertex vertex) {
-        System.out.println(vertex.getLabel());
-        queue.add(vertex);
-        vertex.setVisited(true);
-    }
-
     public int shortDistanceCount(String startLabel, String endLabel) {
         int startIndex = indexOf(startLabel);
-        int endIndex = indexOf(endLabel);
         Vertex vertex = vertexList.get(startIndex);
         shortDistanse = getEdge(startLabel, getNearUnvisitedVertex(vertex).getLabel());
         return shortDistanse;
